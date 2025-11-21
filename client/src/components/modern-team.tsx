@@ -32,21 +32,14 @@ const gradients = [
 const leadership: TeamMember[] = [
   {
     name: "AVIK",
-    role: "Founder & EDM Producer",
+    role: "Founder & CEO",
     description: "Visionary founder driving Mate Nation's mission",
     image: avikImage,
     gradient: gradients[0]
   },
   {
-    name: "Alex Mendez",
-    role: "CEO",
-    description: "Strategic leader orchestrating growth",
-    image: ceoImage,
-    gradient: gradients[1]
-  },
-  {
     name: "Amrit",
-    role: "Investor & Sponsorship",
+    role: "Co-founder",
     description: "Financial strategist and partnership architect",
     image: amritImage,
     gradient: gradients[2]
@@ -55,11 +48,11 @@ const leadership: TeamMember[] = [
 
 const team: TeamMember[] = [
   { name: "Alvin", role: "Director", description: "Operations oversight", gradient: gradients[3] },
+  { name: "Alex Mendez", role: "HOD of DAI group", description: "Strategic leader orchestrating growth", image: ceoImage, gradient: gradients[1] },
   { name: "Abhay", role: "A&R Specialist", description: "Pop & electronic music", image: abhayImage, gradient: gradients[4] },
   { name: "Stefflen", role: "Head of Digital Art", description: "Visual identity leader", gradient: gradients[5] },
-  { name: "Soumyadeep", role: "Head of Video", description: "Video production maestro", gradient: gradients[6] },
+  { name: "Banaj", role: "Head of Video", description: "Video production maestro", gradient: gradients[6] },
   { name: "Peter", role: "Release Coordinator", description: "Distribution management", gradient: gradients[7] },
-  { name: "Pranjit", role: "Strategist", description: "Market strategy expert", gradient: gradients[8] },
   { name: "Utsav", role: "Manager", description: "Operations coordinator", gradient: gradients[9] },
 ];
 

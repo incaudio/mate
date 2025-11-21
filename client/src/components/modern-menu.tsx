@@ -77,7 +77,9 @@ export function ModernMenu() {
                   className="mt-6"
                 >
                   <a
-                    href="#contact"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSfxRvor4d6Z53P-3PQBWBzs5YHwicH9F0qzKenRSUBCAGgsVQ/viewform?usp=header"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setIsOpen(false)}
                     className="block w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white text-center py-4 rounded-full font-semibold shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 transition-all transform hover:scale-105"
                   >

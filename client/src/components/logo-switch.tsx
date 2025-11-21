@@ -16,7 +16,7 @@ export function LogoSwitch() {
         animate={{ scale: isToggled ? 1.1 : 1 }}
         transition={{ duration: 0.3 }}
       >
-        {isToggled ? "♫" : "mate."}
+        {isToggled ? "♫" : "Mate."}
       </motion.h1>
     </motion.div>
   );

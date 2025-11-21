@@ -1,7 +1,6 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { TypingEffect } from "./typing-effect";
 import { useTheme } from "../contexts/theme-context";
-import { useState, useEffect } from "react";
 import cloudImage from "@assets/6705b4a36def1cf003c24d10_Property 1=Day, Property 2=Cloud 3_1760332010666.png";
 
 const particles = Array.from({ length: 15 }, (_, i) => ({
@@ -16,23 +15,6 @@ const particles = Array.from({ length: 15 }, (_, i) => ({
 export function ModernHero() {
   const { theme } = useTheme();
   const isDayTheme = theme === 'day';
-  const [showShootingStar, setShowShootingStar] = useState(false);
-  const [shootingStarKey, setShootingStarKey] = useState(0);
-
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-    const interval = setInterval(() => {
-      setShowShootingStar(true);
-      setShootingStarKey(prev => prev + 1);
-      if (timeoutId) clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => setShowShootingStar(false), 2000);
-    }, 60000);
-
-    return () => {
-      clearInterval(interval);
-      if (timeoutId) clearTimeout(timeoutId);
-    };
-  }, []);
 
   const handleScrollClick = () => {
     const container = document.getElementById('sliding-container');
@@ -46,31 +28,6 @@ export function ModernHero() {
 
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
-      {/* Shooting star effect - only on desktop and night theme */}
-      <AnimatePresence>
-        {!isDayTheme && showShootingStar && (
-          <motion.div
-            key={shootingStarKey}
-            className="hidden md:block absolute top-0 left-[80%] w-1 h-1"
-            initial={{ x: 0, y: 0, opacity: 1 }}
-            animate={{ 
-              x: -400,
-              y: 400,
-              opacity: [1, 1, 0]
-            }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 2, ease: "easeOut" }}
-            style={{
-              background: 'linear-gradient(90deg, transparent, #fff)',
-              boxShadow: '0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffd700',
-              transform: 'rotate(-45deg)',
-              width: '100px',
-              height: '2px',
-            }}
-          />
-        )}
-      </AnimatePresence>
-
       {/* Animated particles/stars - only show in night theme */}
       {!isDayTheme && particles.map((particle) => (
         <motion.div
@@ -155,13 +112,8 @@ export function ModernHero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-8"
         >
-          <h2 className="text-xl md:text-2xl font-light mb-6 text-white">
-            Hello! We are
-          </h2>
-          
-          <div className="mb-8">
+          <div className="mb-2">
             <TypingEffect />
           </div>
 
@@ -169,7 +121,7 @@ export function ModernHero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="text-xl md:text-2xl text-pink-300 font-light italic mb-8"
+            className="text-xl md:text-2xl text-pink-300 font-light italic mb-2"
           >
             The music of revolution,
             <br />
@@ -181,7 +133,7 @@ export function ModernHero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.3, duration: 0.8 }}
-          className="text-base md:text-lg text-gray-200 max-w-xl mx-auto mb-8"
+          className="text-base md:text-lg text-gray-200 max-w-xl mx-auto mb-4"
         >
           Innovative record label celebrating all genres and transforming artists into global superstars.
         </motion.p>

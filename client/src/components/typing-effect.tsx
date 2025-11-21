@@ -1,56 +1,85 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import mateImage from '@assets/Change Things to _Mate._ Complete Mate(.) means the full text Mate with fullstop in the same as there in the image that ballon effect but with a little pink effect_1763719020821.jpg';
 
-export function TypingEffect() {
-  const text = 'mate.';
-  const [displayText, setDisplayText] = useState('');
-  const [isTyping, setIsTyping] = useState(true);
-  const [showCursor, setShowCursor] = useState(true);
-  const [blinkCount, setBlinkCount] = useState(0);
+function FullImageCanvas({ 
+  sourceImage 
+}: { 
+  sourceImage: HTMLImageElement;
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
+    const canvas = canvasRef.current;
+    if (!canvas || !sourceImage.complete) return;
 
-    if (isTyping && displayText.length < text.length) {
-      timeout = setTimeout(() => {
-        setDisplayText(text.slice(0, displayText.length + 1));
-      }, 150);
-    } else if (isTyping && displayText.length === text.length) {
-      setIsTyping(false);
-      setBlinkCount(0);
-    } else if (!isTyping && blinkCount < 7) {
-      timeout = setTimeout(() => {
-        setShowCursor(!showCursor);
-        if (!showCursor) {
-          setBlinkCount(blinkCount + 1);
-        }
-      }, 500);
-    } else if (!isTyping && blinkCount >= 7) {
-      timeout = setTimeout(() => {
-        if (displayText.length > 0) {
-          setDisplayText(displayText.slice(0, -1));
-        } else {
-          setIsTyping(true);
-          setShowCursor(true);
-        }
-      }, 100);
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = sourceImage.width;
+    canvas.height = sourceImage.height;
+
+    ctx.drawImage(sourceImage, 0, 0);
+
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+
+    for (let i = 0; i < data.length; i += 4) {
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+      
+      const brightness = (r + g + b) / 3;
+      if (brightness > 240) {
+        data[i + 3] = 0;
+      }
     }
 
-    return () => clearTimeout(timeout);
-  }, [displayText, isTyping, showCursor, blinkCount, text]);
+    ctx.putImageData(imageData, 0, 0);
+  }, [sourceImage]);
 
   return (
-    <div className="relative inline-block">
-      <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400" style={{ fontFamily: "'Quicksand', 'Rounded', sans-serif", letterSpacing: '-0.02em' }}>
-        {displayText}
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: showCursor ? 1 : 0 }}
-          className="inline-block w-1 h-10 md:h-14 lg:h-16 bg-pink-400 ml-1"
-          style={{ fontFamily: "'Quicksand', 'Rounded', sans-serif" }}
-        >
-        </motion.span>
-      </h1>
+    <motion.canvas
+      ref={canvasRef}
+      className="w-auto h-40 md:h-64 lg:h-80"
+      initial={{ y: 0 }}
+      animate={{ 
+        y: [0, -15, 0, 10, 0]
+      }}
+      transition={{
+        duration: 16,
+        repeat: Infinity,
+        ease: "easeInOut",
+        times: [0, 0.25, 0.5, 0.75, 1]
+      }}
+      style={{
+        filter: 'drop-shadow(0 10px 30px rgba(236, 72, 153, 0.5))'
+      }}
+      data-testid="img-mate-logo"
+    />
+  );
+}
+
+export function TypingEffect() {
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = mateImage;
+    img.onload = () => {
+      imgRef.current = img;
+      setImageLoaded(true);
+    };
+  }, []);
+
+  if (!imageLoaded || !imgRef.current) {
+    return <div className="h-40 md:h-64 lg:h-80" />;
+  }
+
+  return (
+    <div className="relative inline-flex items-center">
+      <FullImageCanvas sourceImage={imgRef.current!} />
     </div>
   );
 }
