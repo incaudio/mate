@@ -42,7 +42,7 @@ export function StickyHeader() {
               whileTap={{ scale: 0.95 }}
               className="px-6 py-2.5 bg-white text-black font-semibold rounded-full hover:bg-gray-100 transition-colors"
             >
-              Submit Demo
+              Apply for Audition
             </motion.button>
           </div>
         </motion.header>

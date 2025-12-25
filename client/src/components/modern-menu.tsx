@@ -100,7 +100,7 @@ export function ModernMenu() {
                     onClick={() => setIsOpen(false)}
                     className="block w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white text-center py-4 rounded-full font-semibold shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 transition-all transform hover:scale-105"
                   >
-                    Submit Demo
+                    Apply for Audition
                   </a>
                 </motion.div>
 

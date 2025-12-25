@@ -111,7 +111,7 @@ export function ModernAbout() {
                   whileTap={{ scale: 0.95 }}
                   className="inline-block px-8 py-4 bg-pink-500 hover:bg-pink-600 text-white rounded-full font-medium transition-all shadow-2xl hover:shadow-pink-500/50"
                 >
-                  Submit Your Demo
+                  Apply for audition
                 </motion.a>
               </motion.div>
             </div>

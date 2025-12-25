@@ -194,7 +194,7 @@ export function ModernTeam() {
   };
 
   return (
-    <section className="py-20 px-6 relative z-10" id="team">
+    <section className="py-4 px-6 relative z-10" id="team">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
