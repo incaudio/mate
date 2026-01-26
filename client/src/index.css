@@ -1,238 +1,92 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=VT323&family=Press+Start+2P&family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root[data-theme="night"] {
-  --background: 250 50% 8%;
-  --foreground: 220 80% 85%;
-  --card: 250 45% 12%;
-  --card-foreground: 220 80% 85%;
-  --popover: 250 45% 12%;
-  --popover-foreground: 220 80% 85%;
-  --primary: 260 85% 65%;
+:root {
+  /* Apple-inspired monochrome palette */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+
+  --card: 0 0% 98%;
+  --card-foreground: 0 0% 0%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 0%;
+
+  --primary: 0 0% 0%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 250 40% 18%;
-  --secondary-foreground: 220 80% 85%;
-  --muted: 250 35% 22%;
-  --muted-foreground: 220 40% 65%;
-  --accent: 210 85% 60%;
-  --accent-foreground: 0 0% 100%;
+
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 10%;
+
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+
+  --accent: 0 0% 96%;
+  --accent-foreground: 0 0% 10%;
+
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
-  --border: 250 40% 28%;
-  --input: 250 40% 20%;
-  --ring: 260 85% 65%;
-  --radius: 0.5rem;
-  --font-sans: 'Inter', sans-serif;
-  --font-retro: 'VT323', monospace;
-  --font-pixel: 'Press Start 2P', cursive;
+
+  --border: 0 0% 90%;
+  --input: 0 0% 90%;
+  --ring: 0 0% 0%;
+
+  --radius: 1rem;
 }
 
-:root[data-theme="day"] {
-  --background: 220 100% 97%;
-  --foreground: 250 60% 25%;
-  --card: 220 100% 99%;
-  --card-foreground: 250 60% 25%;
-  --popover: 220 100% 99%;
-  --popover-foreground: 250 60% 25%;
-  --primary: 260 85% 60%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 220 80% 92%;
-  --secondary-foreground: 250 60% 25%;
-  --muted: 220 60% 88%;
-  --muted-foreground: 250 35% 50%;
-  --accent: 210 100% 55%;
+.dark {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+
+  --card: 0 0% 10%;
+  --card-foreground: 0 0% 100%;
+
+  --popover: 0 0% 5%;
+  --popover-foreground: 0 0% 100%;
+
+  --primary: 0 0% 100%;
+  --primary-foreground: 0 0% 0%;
+
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 100%;
+
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 65%;
+
+  --accent: 0 0% 15%;
   --accent-foreground: 0 0% 100%;
-  --destructive: 0 84% 60%;
+
+  --destructive: 0 62% 30%;
   --destructive-foreground: 0 0% 98%;
-  --border: 220 50% 85%;
-  --input: 220 80% 94%;
-  --ring: 260 85% 60%;
-  --radius: 0.5rem;
-  --font-sans: 'Inter', sans-serif;
-  --font-retro: 'VT323', monospace;
-  --font-pixel: 'Press Start 2P', cursive;
+
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
+  --ring: 0 0% 80%;
 }
 
 @layer base {
   * {
     @apply border-border;
   }
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-black/10 selection:text-black dark:selection:bg-white/20 dark:selection:text-white;
+  }
   
+  /* Apple-style smooth scrolling */
   html {
     scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    min-height: 100%;
-    height: 100%;
-  }
-
-  body {
-    @apply font-sans antialiased text-foreground;
-    overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    -webkit-overflow-scrolling: touch;
-    min-height: 100%;
-    height: 100%;
-  }
-  
-  /* Performance optimizations for mobile */
-  @media (max-width: 768px) {
-    * {
-      -webkit-transform: translateZ(0);
-      transform: translateZ(0);
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-    }
-  }
-
-  [data-theme="night"] html {
-    background: #1a1d3d;
-    background: linear-gradient(180deg, #1a1d3d 0%, #0a0b1a 100%) no-repeat;
-    background-size: 100% 100%;
-  }
-
-  [data-theme="night"] body {
-    background: transparent;
-    color: hsl(220 80% 85%);
-  }
-
-  [data-theme="day"] html {
-    background: #5865f2;
-    background: linear-gradient(180deg, #5865f2 0%, #4752c4 100%) no-repeat;
-    background-size: 100% 100%;
-  }
-
-  [data-theme="day"] body {
-    background: transparent;
-    color: hsl(0 0% 100%);
   }
 }
 
-@layer utilities {
-  .retro-text {
-    font-family: var(--font-retro);
-    text-shadow: 0 0 10px currentColor;
-  }
+/* Custom utility for the glass effect */
+.glass-panel {
+  @apply bg-white/70 dark:bg-black/70 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-xl;
+}
 
-  .pixel-text {
-    font-family: var(--font-pixel);
-    image-rendering: pixelated;
-  }
-
-  .crt-effect {
-    position: relative;
-  }
-
-  .crt-effect::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      transparent 50%, 
-      rgba(0, 0, 0, 0.1) 50%
-    );
-    background-size: 100% 4px;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  [data-theme="night"] .grain-texture {
-    background-image: 
-      radial-gradient(circle at 1px 1px, rgba(180, 255, 255, 0.1) 1px, transparent 0);
-    background-size: 20px 20px;
-    pointer-events: none;
-  }
-
-  [data-theme="day"] .grain-texture {
-    background-image: 
-      radial-gradient(circle at 1px 1px, rgba(100, 50, 150, 0.08) 1px, transparent 0);
-    background-size: 20px 20px;
-    pointer-events: none;
-  }
-
-  .retro-glow {
-    box-shadow: 0 0 20px currentColor, inset 0 0 20px rgba(255, 255, 255, 0.1);
-  }
-
-  .bubble-glow {
-    box-shadow: 
-      0 0 30px rgba(139, 92, 246, 0.3),
-      0 0 60px rgba(59, 130, 246, 0.2),
-      inset 0 0 30px rgba(255, 255, 255, 0.1);
-  }
-
-  .bubble {
-    border-radius: 9999px;
-  }
-
-  .musical-wave {
-    background: repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 10px,
-      currentColor 10px,
-      currentColor 11px
-    );
-    opacity: 0.1;
-  }
-
-  .vinyl-spin {
-    animation: spin 3s linear infinite;
-  }
-
-  .note-float {
-    animation: noteFloat 4s ease-in-out infinite;
-  }
-
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  @keyframes noteFloat {
-    0%, 100% { 
-      transform: translateY(0px) translateX(0px) rotate(0deg);
-      opacity: 0.6;
-    }
-    25% {
-      transform: translateY(-20px) translateX(5px) rotate(5deg);
-      opacity: 1;
-    }
-    75% {
-      transform: translateY(-10px) translateX(-5px) rotate(-5deg);
-      opacity: 0.8;
-    }
-  }
-
-  .hexagon-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-  }
-
-  .smooth-scroll {
-    scroll-behavior: smooth;
-  }
-
-  @keyframes scanline {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100vh); }
-  }
-
-  .scanline {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: scanline 8s linear infinite;
-    pointer-events: none;
-    z-index: 999;
-  }
+/* Typography utilities */
+.text-balance {
+  text-wrap: balance;
 }
